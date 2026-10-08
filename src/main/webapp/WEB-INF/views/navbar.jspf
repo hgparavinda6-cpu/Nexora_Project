@@ -1,0 +1,70 @@
+<%@ page import="com.nexora.model.User" %>
+<%
+    Object navUser = session.getAttribute("user");
+    String navRole = navUser instanceof User ? ((User) navUser).getRole() : null;
+    String navBase = request.getContextPath();
+    String navCur = (String) request.getAttribute("jakarta.servlet.forward.servlet_path");
+    if (navCur == null) navCur = request.getServletPath();
+
+    String[][] navItems;
+    if (navRole == null) {
+        navItems = new String[][]{{"/shop", "Shop"}, {"/offers", "Offers"}};
+    } else if ("Customer".equals(navRole)) {
+        navItems = new String[][]{{"/shop", "Shop"}, {"/offers", "Offers"}, {"/cart", "My Cart"},
+                {"/orders", "My Orders"}, {"/track", "Track Order"}, {"/support", "Support"},
+                {"/feedback", "My Feedback"}};
+    } else if ("Administrator".equals(navRole)) {
+        navItems = new String[][]{{"/products", "Products"}, {"/inventory", "Inventory"},
+                {"/categories", "Categories"}, {"/manageorders", "Orders"},
+                {"/promotions", "Promotions"}, {"/shop", "View Shop"}};
+    } else if ("DeliveryStaff".equals(navRole)) {
+        navItems = new String[][]{{"/deliveries", "My Deliveries"}};
+    } else if ("DeliveryAdmin".equals(navRole)) {
+        navItems = new String[][]{{"/assigndelivery", "Deliveries"}};
+    } else if ("SupportOfficer".equals(navRole)) {
+        navItems = new String[][]{{"/tickets", "Tickets"}, {"/feedbackadmin", "Feedback"}};
+    } else {
+        navItems = new String[0][];
+    }
+%>
+<%@ include file="/WEB-INF/views/style.jspf" %>
+<header class="nx-nav">
+    <div class="nx-nav-inner">
+        <a class="nx-brand" href="<%= navRole != null ? (navBase + "/home.jsp") : (navBase + "/shop") %>">
+            <span class="nx-brand-icon">
+                <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+            </span>
+            <span>Nexora</span>
+        </a>
+
+        <nav class="nx-links" aria-label="Main Navigation">
+            <% if (navRole != null) { %>
+                <a href="<%= navBase %>/home.jsp"<%= "/home.jsp".equals(navCur) ? " class=\"is-here\"" : "" %>>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    Dashboard
+                </a>
+            <% } %>
+            <% for (String[] it : navItems) { %>
+                <a href="<%= navBase + it[0] %>"<%= it[0].equals(navCur) ? " class=\"is-here\"" : "" %>><%= it[1] %></a>
+            <% } %>
+        </nav>
+
+        <div class="nx-user">
+            <% if (navRole == null) { %>
+                <a href="<%= navBase %>/login.jsp" class="nx-nav-btn nx-nav-btn-ghost">Log in</a>
+                <a href="<%= navBase %>/register.jsp" class="nx-nav-btn nx-nav-btn-primary">Register</a>
+            <% } else {
+                User u = (User) navUser;
+                String initial = u.getFullName() != null && !u.getFullName().isEmpty() 
+                                 ? u.getFullName().substring(0, 1).toUpperCase() : "U";
+            %>
+                <div class="nx-user-pill">
+                    <span class="nx-avatar-dot"><%= initial %></span>
+                    <span><%= u.getFullName() %></span>
+                    <span class="nx-role-tag"><%= navRole %></span>
+                </div>
+                <a href="<%= navBase %>/logout" class="nx-nav-btn nx-nav-btn-ghost">Log out</a>
+            <% } %>
+        </div>
+    </div>
+</header>

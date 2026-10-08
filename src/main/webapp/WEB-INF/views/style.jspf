@@ -1,0 +1,611 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --nx-brand: #0E3B43;
+  --nx-brand-dark: #072328;
+  --nx-brand-light: #165662;
+  --nx-accent: #F59E0B;
+  --nx-accent-light: #FEF3C7;
+  --nx-accent-hover: #D97706;
+  --nx-emerald: #10B981;
+  --nx-emerald-light: #ECFDF5;
+  --nx-sky: #0284C7;
+  --nx-sky-light: #E0F2FE;
+  --nx-rose: #EF4444;
+  --nx-rose-light: #FEF2F2;
+  --nx-purple: #8B5CF6;
+  --nx-purple-light: #F5F3FF;
+
+  --nx-bg: #F8FAFC;
+  --nx-card: #FFFFFF;
+  --nx-card-subtle: #F1F5F9;
+  --nx-border: #E2E8F0;
+  --nx-border-strong: #CBD5E1;
+
+  --nx-text: #0F172A;
+  --nx-text-muted: #64748B;
+  --nx-text-light: #94A3B8;
+
+  --nx-radius-sm: 8px;
+  --nx-radius: 12px;
+  --nx-radius-lg: 16px;
+  --nx-radius-xl: 22px;
+
+  --nx-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --nx-shadow: 0 4px 14px -2px rgba(15, 23, 42, 0.07), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+  --nx-shadow-lg: 0 14px 34px -4px rgba(15, 23, 42, 0.1), 0 6px 14px -2px rgba(15, 23, 42, 0.05);
+  --nx-shadow-hover: 0 20px 40px -6px rgba(14, 59, 67, 0.15), 0 8px 18px -4px rgba(15, 23, 42, 0.08);
+
+  /* පළල: ලොකු කරන්න මේක වැඩි කරන්න (1900px), පොඩි කරන්න අඩු කරන්න */
+  --nx-container-max: 1900px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--nx-bg);
+  color: var(--nx-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Page content wrapper standardizing layout */
+body > *:not(.nx-nav):not(script):not(style) {
+  max-width: var(--nx-container-max);
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: calc(100% - 32px);
+}
+
+a {
+  color: var(--nx-brand);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  color: var(--nx-accent-hover);
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  color: var(--nx-text);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-top: 0;
+  letter-spacing: -0.025em;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 800;
+  margin-top: 32px;
+  margin-bottom: 20px;
+  color: #0B2228;
+  letter-spacing: -0.035em;
+}
+
+@media (min-width: 768px) {
+  h1 { font-size: 38px; }
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 36px;
+  margin-bottom: 16px;
+}
+
+h3 {
+  font-size: 19px;
+  font-weight: 700;
+  margin-top: 28px;
+  margin-bottom: 12px;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+/* ==========================================================================
+   Navbar
+   ========================================================================== */
+.nx-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(14, 59, 67, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 0 24px;
+  height: 68px;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.nx-nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--nx-container-max);
+  margin: 0 auto;
+  gap: 16px;
+}
+
+.nx-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.03em;
+  color: #FFFFFF !important;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.nx-brand-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--nx-accent), #EA580C);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.35);
+}
+
+.nx-brand-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: #FFFFFF;
+  stroke-width: 2.5;
+  fill: none;
+}
+
+.nx-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 auto 0 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nx-links::-webkit-scrollbar {
+  display: none;
+}
+
+.nx-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  color: #D1E1E4;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--nx-radius-sm);
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.nx-links a:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nx-links a.is-here,
+.nx-links a.on {
+  color: #FFFFFF;
+  background: rgba(245, 158, 11, 0.22);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.nx-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.nx-user-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  color: #F8FAFC;
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.nx-avatar-dot {
+  width: 22px;
+  height: 22px;
+  background: linear-gradient(135deg, #0284C7, #38BDF8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.nx-role-tag {
+  background: rgba(245, 158, 11, 0.2);
+  color: var(--nx-accent);
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.nx-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--nx-radius-sm);
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.nx-nav-btn-ghost {
+  color: #FFFFFF;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.nx-nav-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.nx-nav-btn-primary {
+  background: linear-gradient(135deg, var(--nx-accent), #EA580C);
+  color: #FFFFFF !important;
+  border: none;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+.nx-nav-btn-primary:hover {
+  background: linear-gradient(135deg, #FBBF24, #F97316);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+button, input[type=submit], .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15.5px;
+  font-weight: 600;
+  padding: 12px 22px;
+  border-radius: var(--nx-radius-sm);
+  border: 1px solid transparent;
+  background: var(--nx-brand);
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  box-shadow: 0 2px 5px rgba(14, 59, 67, 0.18);
+  line-height: 1.25;
+}
+
+button:hover, input[type=submit]:hover, .btn:hover {
+  background: var(--nx-brand-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(14, 59, 67, 0.25);
+}
+
+button:active, input[type=submit]:active, .btn:active {
+  transform: translateY(0);
+}
+
+/* Light / Secondary / Cancel / Delete Variations */
+form[method=get] button, form[method=GET] button, button[type=button], .btn-secondary {
+  background: #FFFFFF;
+  color: var(--nx-text);
+  border: 1px solid var(--nx-border-strong);
+  box-shadow: var(--nx-shadow-sm);
+}
+
+form[method=get] button:hover, form[method=GET] button:hover, button[type=button]:hover, .btn-secondary:hover {
+  background: var(--nx-card-subtle);
+  border-color: var(--nx-text-muted);
+  color: var(--nx-brand);
+}
+
+/* Delete / Cancel buttons */
+button[onclick*="Delete"], button[onclick*="delete"],
+button[onclick*="Cancel"], button[onclick*="cancel"],
+button[onclick*="Remove"], button[onclick*="remove"],
+button[name="action"][value="delete"],
+.btn-danger {
+  background: #FFFFFF !important;
+  color: var(--nx-rose) !important;
+  border: 1px solid #FECACA !important;
+  box-shadow: var(--nx-shadow-sm);
+}
+
+button[onclick*="Delete"]:hover, button[onclick*="delete"]:hover,
+button[onclick*="Cancel"]:hover, button[onclick*="cancel"]:hover,
+button[onclick*="Remove"]:hover, button[onclick*="remove"]:hover,
+button[name="action"][value="delete"]:hover,
+.btn-danger:hover {
+  background: var(--nx-rose-light) !important;
+  border-color: var(--nx-rose) !important;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Form Controls
+   ========================================================================== */
+input[type=text], input[type=email], input[type=password], input[type=number],
+input[type=tel], input[type=search], input[type=date], textarea, select {
+  font-family: inherit;
+  font-size: 15.5px;
+  color: var(--nx-text);
+  background-color: #FFFFFF;
+  border: 1px solid var(--nx-border);
+  border-radius: var(--nx-radius-sm);
+  padding: 12px 16px;
+  transition: all 0.2s ease;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
+  max-width: 100%;
+}
+
+input[type=text]:focus, input[type=email]:focus, input[type=password]:focus,
+input[type=number]:focus, input[type=tel]:focus, input[type=search]:focus,
+input[type=date]:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--nx-brand);
+  box-shadow: 0 0 0 3px rgba(14, 59, 67, 0.12);
+}
+
+label {
+  display: inline-block;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--nx-text);
+  margin-bottom: 6px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* ==========================================================================
+   Modern Tables (ලොකු අකුරු සහ ඉඩ)
+   ========================================================================== */
+table, table[border="1"] {
+  width: 100%;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  background: #FFFFFF;
+  border: 1px solid var(--nx-border) !important;
+  border-radius: var(--nx-radius);
+  overflow: hidden;
+  box-shadow: var(--nx-shadow-sm);
+  margin-top: 18px;
+  margin-bottom: 24px;
+}
+
+th {
+  background: #F8FAFC;
+  color: var(--nx-text-muted);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 20px 20px;
+  border-bottom: 1px solid var(--nx-border);
+  text-align: left;
+}
+
+td {
+  padding: 24px 20px;
+  border-bottom: 1px solid var(--nx-border);
+  color: var(--nx-text);
+  font-size: 17px;
+  vertical-align: middle;
+  background: #FFFFFF;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:hover td {
+  background-color: #F8FAFC;
+}
+
+/* ==========================================================================
+   Alerts & Notifications
+   ========================================================================== */
+p[style*="color:green"], p[style*="color: green"], .alert-success {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--nx-emerald-light) !important;
+  color: #065F46 !important;
+  border: 1px solid #A7F3D0 !important;
+  border-left: 5px solid var(--nx-emerald) !important;
+  padding: 14px 18px;
+  border-radius: var(--nx-radius-sm);
+  font-weight: 500;
+  font-size: 15.5px;
+  margin: 16px 0;
+  box-shadow: var(--nx-shadow-sm);
+}
+
+p[style*="color:red"], p[style*="color: red"], .alert-error {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--nx-rose-light) !important;
+  color: #991B1B !important;
+  border: 1px solid #FECACA !important;
+  border-left: 5px solid var(--nx-rose) !important;
+  padding: 14px 18px;
+  border-radius: var(--nx-radius-sm);
+  font-weight: 500;
+  font-size: 15.5px;
+  margin: 16px 0;
+  box-shadow: var(--nx-shadow-sm);
+}
+
+/* ==========================================================================
+   Status Badges
+   ========================================================================== */
+.nx-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.badge-pending {
+  background: var(--nx-accent-light);
+  color: #B45309;
+  border: 1px solid #FDE68A;
+}
+
+.badge-processing {
+  background: var(--nx-sky-light);
+  color: #0369A1;
+  border: 1px solid #BAE6FD;
+}
+
+.badge-delivered, .badge-active, .badge-instock {
+  background: var(--nx-emerald-light);
+  color: #047857;
+  border: 1px solid #A7F3D0;
+}
+
+.badge-cancelled, .badge-outofstock {
+  background: var(--nx-rose-light);
+  color: #B91C1C;
+  border: 1px solid #FECACA;
+}
+
+.badge-delivery {
+  background: var(--nx-purple-light);
+  color: #6D28D9;
+  border: 1px solid #DDD6FE;
+}
+
+/* ==========================================================================
+   Cards & Layouts
+   ========================================================================== */
+.nx-card {
+  background: #FFFFFF;
+  border: 1px solid var(--nx-border);
+  border-radius: var(--nx-radius-lg);
+  padding: 24px;
+  box-shadow: var(--nx-shadow-sm);
+  transition: all 0.25s ease;
+}
+
+.nx-card:hover {
+  box-shadow: var(--nx-shadow);
+}
+
+.nx-section-header {
+  margin-bottom: 24px;
+}
+
+.nx-section-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.nx-section-lead {
+  color: var(--nx-text-muted);
+  font-size: 15px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  body > *:not(.nx-nav):not(script):not(style) {
+    width: calc(100% - 24px);
+  }
+
+  .nx-nav {
+    padding: 0 16px;
+    height: 60px;
+  }
+
+  .nx-brand {
+    font-size: 19px;
+  }
+
+  .nx-links {
+    margin: 0 8px;
+  }
+
+  .nx-links a {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  th { font-size: 12px; padding: 14px 14px; }
+  td { font-size: 15px; padding: 16px 14px; }
+}
+</style>
